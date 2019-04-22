@@ -8,26 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		4C135E0A226765C9001C63C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C135E09226765C9001C63C7 /* AppDelegate.swift */; };
-		4C135E0C226765C9001C63C7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E0B226765C9001C63C7 /* GameScene.sks */; };
-		4C135E0E226765C9001C63C7 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E0D226765C9001C63C7 /* Actions.sks */; };
 		4C135E10226765C9001C63C7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C135E0F226765C9001C63C7 /* GameScene.swift */; };
 		4C135E12226765C9001C63C7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C135E11226765C9001C63C7 /* GameViewController.swift */; };
 		4C135E15226765C9001C63C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E13226765C9001C63C7 /* Main.storyboard */; };
 		4C135E17226765CA001C63C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E16226765CA001C63C7 /* Assets.xcassets */; };
 		4C135E1A226765CA001C63C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E18226765CA001C63C7 /* LaunchScreen.storyboard */; };
+		4C5F1D16226DF6CC000C7CA7 /* attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D15226DF6CC000C7CA7 /* attack.atlas */; };
+		4C5F1D18226DF6D4000C7CA7 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D17226DF6D4000C7CA7 /* idle.atlas */; };
+		4C5F1D1A226DF6D9000C7CA7 /* die.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D19226DF6D9000C7CA7 /* die.atlas */; };
+		4C5F1D1C226DF6DF000C7CA7 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D1B226DF6DF000C7CA7 /* run.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C135E06226765C9001C63C7 /* Fight Knight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fight Knight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C135E09226765C9001C63C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C135E0B226765C9001C63C7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		4C135E0D226765C9001C63C7 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		4C135E0F226765C9001C63C7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		4C135E11226765C9001C63C7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4C135E14226765C9001C63C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C135E16226765CA001C63C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C135E19226765CA001C63C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C135E1B226765CA001C63C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C5F1D15226DF6CC000C7CA7 /* attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = attack.atlas; path = ../../Assets/valiant_knight/style_A/PNG/attack.atlas; sourceTree = "<group>"; };
+		4C5F1D17226DF6D4000C7CA7 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = idle.atlas; path = ../../Assets/valiant_knight/style_A/PNG/idle.atlas; sourceTree = "<group>"; };
+		4C5F1D19226DF6D9000C7CA7 /* die.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = die.atlas; path = ../../Assets/valiant_knight/style_A/PNG/die.atlas; sourceTree = "<group>"; };
+		4C5F1D1B226DF6DF000C7CA7 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = run.atlas; path = ../../Assets/valiant_knight/style_A/PNG/run.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +64,11 @@
 		4C135E08226765C9001C63C7 /* Fight Knight */ = {
 			isa = PBXGroup;
 			children = (
+				4C5F1D1B226DF6DF000C7CA7 /* run.atlas */,
+				4C5F1D19226DF6D9000C7CA7 /* die.atlas */,
+				4C5F1D17226DF6D4000C7CA7 /* idle.atlas */,
+				4C5F1D15226DF6CC000C7CA7 /* attack.atlas */,
 				4C135E09226765C9001C63C7 /* AppDelegate.swift */,
-				4C135E0B226765C9001C63C7 /* GameScene.sks */,
-				4C135E0D226765C9001C63C7 /* Actions.sks */,
 				4C135E0F226765C9001C63C7 /* GameScene.swift */,
 				4C135E11226765C9001C63C7 /* GameViewController.swift */,
 				4C135E13226765C9001C63C7 /* Main.storyboard */,
@@ -132,10 +138,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C135E15226765C9001C63C7 /* Main.storyboard in Resources */,
-				4C135E0C226765C9001C63C7 /* GameScene.sks in Resources */,
+				4C5F1D16226DF6CC000C7CA7 /* attack.atlas in Resources */,
+				4C5F1D1C226DF6DF000C7CA7 /* run.atlas in Resources */,
 				4C135E17226765CA001C63C7 /* Assets.xcassets in Resources */,
+				4C5F1D18226DF6D4000C7CA7 /* idle.atlas in Resources */,
 				4C135E1A226765CA001C63C7 /* LaunchScreen.storyboard in Resources */,
-				4C135E0E226765C9001C63C7 /* Actions.sks in Resources */,
+				4C5F1D1A226DF6D9000C7CA7 /* die.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
