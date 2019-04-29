@@ -13,10 +13,15 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var Knight: SKSpriteNode!
+    private var knight: SKSpriteNode!
+    private var knightIdleFrames: [SKTexture] = []
+    private var knightAttackFrames: [SKTexture] = []
+    private var knightRunFrames: [SKTexture] = []
+    private var knightDieFrames: [SKTexture] = []
     
     override func didMove(to view: SKView) {
         setUpScenery()
+        setUpKnight()
     }
     
     fileprivate func setUpScenery() {
@@ -34,6 +39,91 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ground.size = CGSize(width: size.width, height: size.height * 0.13)
         addChild(ground)
     }
+    
+    fileprivate func setUpKnight() {
+        setIdle()
+        setRun()
+        setDie()
+        setAttack()
+        runKnight("idle")
+    }
+    
+    func runKnight(_ status: String) {
+        let firstFrameTexture = knightIdleFrames[0]
+        knight = SKSpriteNode(texture: firstFrameTexture)
+        knight.position = CGPoint(x: frame.midX, y: frame.midY)
+        knight.zPosition = Layer.Knight
+        addChild(knight)
+        animateKnight()
+    }
+    
+    func setIdle() {
+        let knightAnimatedAtlas = SKTextureAtlas(named: "idle")
+        var idleFrames: [SKTexture] = []
+        
+        let numImages = knightAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let knightTextureName = "knight\(i)"
+            idleFrames.append(knightAnimatedAtlas.textureNamed(knightTextureName))
+        }
+        knightIdleFrames = idleFrames
+    }
+    
+    func setRun() {
+        let knightAnimatedAtlas = SKTextureAtlas(named: "run")
+        var runFrames: [SKTexture] = []
+        
+        let numImages = knightAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let knightTextureName = "knight\(i)"
+            runFrames.append(knightAnimatedAtlas.textureNamed(knightTextureName))
+        }
+        knightRunFrames = runFrames
+    }
+    
+    func setDie() {
+        let knightAnimatedAtlas = SKTextureAtlas(named: "die")
+        var dieFrames: [SKTexture] = []
+        
+        let numImages = knightAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let knightTextureName = "knight\(i)"
+            dieFrames.append(knightAnimatedAtlas.textureNamed(knightTextureName))
+        }
+        knightDieFrames = dieFrames
+    }
+    
+    func setAttack() {
+        let knightAnimatedAtlas = SKTextureAtlas(named: "attack")
+        var attackFrames: [SKTexture] = []
+    
+        let numImages = knightAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+        let knightTextureName = "knight\(i)"
+            attackFrames.append(knightAnimatedAtlas.textureNamed(knightTextureName))
+        }
+        knightAttackFrames = attackFrames
+    }
+    
+    fileprivate func animateKnight() {
+        knight.run(SKAction.repeatForever(
+            SKAction.animate(with: knightIdleFrames,
+                             timePerFrame: 0.1,
+                             resize: false,
+                             restore: true)),
+                 withKey:"idkeKnight")
+    }
+//
+//    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) {
+//        knight.removeAllActions()
+//
+//        let closeMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthClosed))
+//        let wait = SKAction.wait(forDuration: delay)
+//        let openMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthOpen))
+//        let sequence = SKAction.sequence([closeMouth, wait, openMouth, wait, closeMouth])
+//
+//        knight.run(sequence)
+//    }
     
     
 //    func touchDown(atPoint pos : CGPoint) {
