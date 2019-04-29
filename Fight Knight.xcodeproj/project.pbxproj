@@ -17,6 +17,7 @@
 		4C5F1D18226DF6D4000C7CA7 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D17226DF6D4000C7CA7 /* idle.atlas */; };
 		4C5F1D1A226DF6D9000C7CA7 /* die.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D19226DF6D9000C7CA7 /* die.atlas */; };
 		4C5F1D1C226DF6DF000C7CA7 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C5F1D1B226DF6DF000C7CA7 /* run.atlas */; };
+		4C68332422709B7400D5BC6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C68332322709B7400D5BC6C /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4C5F1D17226DF6D4000C7CA7 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = idle.atlas; path = ../../Assets/valiant_knight/style_A/PNG/idle.atlas; sourceTree = "<group>"; };
 		4C5F1D19226DF6D9000C7CA7 /* die.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = die.atlas; path = ../../Assets/valiant_knight/style_A/PNG/die.atlas; sourceTree = "<group>"; };
 		4C5F1D1B226DF6DF000C7CA7 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = run.atlas; path = ../../Assets/valiant_knight/style_A/PNG/run.atlas; sourceTree = "<group>"; };
+		4C68332322709B7400D5BC6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,15 +70,32 @@
 				4C5F1D19226DF6D9000C7CA7 /* die.atlas */,
 				4C5F1D17226DF6D4000C7CA7 /* idle.atlas */,
 				4C5F1D15226DF6CC000C7CA7 /* attack.atlas */,
+				4C68332122709B2B00D5BC6C /* Classes */,
+				4C135E16226765CA001C63C7 /* Assets.xcassets */,
+				4C135E18226765CA001C63C7 /* LaunchScreen.storyboard */,
+				4C68332222709B3E00D5BC6C /* Supporting Files */,
+			);
+			path = "Fight Knight";
+			sourceTree = "<group>";
+		};
+		4C68332122709B2B00D5BC6C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4C68332322709B7400D5BC6C /* Constants.swift */,
 				4C135E09226765C9001C63C7 /* AppDelegate.swift */,
 				4C135E0F226765C9001C63C7 /* GameScene.swift */,
 				4C135E11226765C9001C63C7 /* GameViewController.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4C68332222709B3E00D5BC6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				4C135E13226765C9001C63C7 /* Main.storyboard */,
-				4C135E16226765CA001C63C7 /* Assets.xcassets */,
-				4C135E18226765CA001C63C7 /* LaunchScreen.storyboard */,
 				4C135E1B226765CA001C63C7 /* Info.plist */,
 			);
-			path = "Fight Knight";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +176,7 @@
 				4C135E10226765C9001C63C7 /* GameScene.swift in Sources */,
 				4C135E12226765C9001C63C7 /* GameViewController.swift in Sources */,
 				4C135E0A226765C9001C63C7 /* AppDelegate.swift in Sources */,
+				4C68332422709B7400D5BC6C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +323,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Fight Knight/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Fight Knight/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,7 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Fight Knight/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Fight Knight/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
