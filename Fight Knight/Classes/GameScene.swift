@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jessica Halbert. All rights reserved.
 //  https://www.raywenderlich.com/144-spritekit-animations-and-texture-atlases-in-swift
 //  at a simple animation
+//  https://stackoverflow.com/questions/41292166/animation-atlas-and-dynamic-physicsbody-in-swift-3
 
 import SpriteKit
 import GameplayKit
@@ -14,17 +15,21 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var knight: SKSpriteNode!
+    private var lastKnightSize: CGSize!
     private var knightIdleFrames: [SKTexture] = []
     private var knightAttackFrames: [SKTexture] = []
     private var knightRunFrames: [SKTexture] = []
     private var knightDieFrames: [SKTexture] = []
     
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+        physicsWorld.speed = 1.0
         setUpScenery()
         setUpKnight()
     }
     
-    fileprivate func setUpScenery() {
+    func setUpScenery() {
         let background = SKSpriteNode(imageNamed: ImageName.Background)
         background.anchorPoint = CGPoint(x: 0, y: 0)
         background.position = CGPoint(x: 0, y: 0)
@@ -37,10 +42,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ground.position = CGPoint(x: 0, y: 0)
         ground.zPosition = Layer.Ground
         ground.size = CGSize(width: size.width, height: size.height * 0.13)
+        
+        ground.physicsBody = SKPhysicsBody.init(rectangleOf: ground.size)
+        ground.physicsBody?.isDynamic = false
+        ground.physicsBody?.allowsRotation = false
+        ground.physicsBody?.affectedByGravity = false
         addChild(ground)
     }
     
-    fileprivate func setUpKnight() {
+    func setUpKnight() {
         setIdle()
         setRun()
         setDie()
@@ -50,11 +60,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func runKnight(_ status: String) {
         let firstFrameTexture = knightIdleFrames[0]
-        knight = SKSpriteNode(texture: firstFrameTexture)
-        knight.position = CGPoint(x: frame.midX, y: frame.midY)
+        knight = SKSpriteNode(texture: firstFrameTexture,size:CGSize(width:1,height:1))
+        knight.position = CGPoint(x: frame.midX / 2, y: frame.midY / 2.5)
         knight.zPosition = Layer.Knight
+        lastKnightSize = knight.texture?.size()
+        setPhysics()
+        
         addChild(knight)
-        animateKnight()
+        animateKnight(status)
+    }
+    
+    override func didEvaluateActions() {
+        lastKnightSize = knight.texture?.size()
+        knight.xScale = lastKnightSize.width
+        knight.yScale = lastKnightSize.height
+    }
+    
+    func setPhysics() {
+        knight.physicsBody = SKPhysicsBody.init(rectangleOf: knight.frame.size)
+        knight.physicsBody?.isDynamic = true
+        knight.physicsBody?.allowsRotation = false
+        knight.physicsBody?.affectedByGravity = true
     }
     
     func setIdle() {
@@ -105,13 +131,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knightAttackFrames = attackFrames
     }
     
-    fileprivate func animateKnight() {
-        knight.run(SKAction.repeatForever(
-            SKAction.animate(with: knightIdleFrames,
-                             timePerFrame: 0.1,
-                             resize: false,
-                             restore: true)),
-                 withKey:"idkeKnight")
+    func animateKnight(_ status: String) {
+        if status == "attack" {
+            knight.run(SKAction.repeatForever(
+                SKAction.animate(with: knightAttackFrames,
+                                 timePerFrame: 0.1,
+                                 resize: false,
+                                 restore: true)),
+                       withKey:"animateKnight")
+        } else if status == "die" {
+            knight.run(SKAction.repeatForever(
+                SKAction.animate(with: knightDieFrames,
+                                 timePerFrame: 0.1,
+                                 resize: false,
+                                 restore: true)),
+                       withKey:"animateKnight")
+        } else if status == "run" {
+            knight.run(SKAction.repeatForever(
+                SKAction.animate(with: knightRunFrames,
+                                 timePerFrame: 0.1,
+                                 resize: false,
+                                 restore: true)),
+                       withKey:"animateKnight")
+        }
+        else {
+            knight.run(SKAction.repeatForever(
+                SKAction.animate(with: knightIdleFrames,
+                                 timePerFrame: 0.1,
+                                 resize: false,
+                                 restore: true)),
+                       withKey:"animateKnight")
+        }
+        
     }
 //
 //    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) {
