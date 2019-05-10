@@ -36,6 +36,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUpButtons()
         setUpSkull()
         
+        let backgroundMusic = SKAudioNode(fileNamed: "music.mp3")
+        backgroundMusic.autoplayLooped = true
+        addChild(backgroundMusic)
+        
         run(SKAction.repeatForever(
             SKAction.sequence([
                 SKAction.run(runSkull),
