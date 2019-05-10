@@ -132,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setSkullPhysics() {
         skull.physicsBody = SKPhysicsBody.init(rectangleOf: skull.frame.size)
-        skull.physicsBody?.isDynamic = true
+        skull.physicsBody?.isDynamic = false
         skull.physicsBody?.allowsRotation = false
     }
     
@@ -160,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setPhysics() {
         knight.physicsBody = SKPhysicsBody.init(rectangleOf: knight.frame.size)
-        knight.physicsBody?.isDynamic = true
+        knight.physicsBody?.isDynamic = false
         knight.physicsBody?.allowsRotation = false
     }
     
