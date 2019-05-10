@@ -16,11 +16,10 @@
 		4C68332422709B7400D5BC6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C68332322709B7400D5BC6C /* Constants.swift */; };
 		4C6D7B46228538C700B1F13C /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B45228538C700B1F13C /* music.mp3 */; };
 		4C6D7B4822853EA800B1F13C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D7B4722853EA800B1F13C /* GameOverScene.swift */; };
-		4C6D7B952285B47E00B1F13C /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B942285B47E00B1F13C /* idle.atlas */; };
 		4C6D7B992285B4F800B1F13C /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B982285B4F800B1F13C /* run.atlas */; };
 		4C6D7B9B2285B52F00B1F13C /* skull.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B9A2285B52F00B1F13C /* skull.atlas */; };
 		4C6D7B9D2285B6F700B1F13C /* attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B9C2285B6F700B1F13C /* attack.atlas */; };
-		4CEE8BC6227C76F400E47EBE /* die.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC2227C76F400E47EBE /* die.atlas */; };
+		4C6D7B9F2285B88000B1F13C /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B9E2285B88000B1F13C /* idle.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +34,10 @@
 		4C68332322709B7400D5BC6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C6D7B45228538C700B1F13C /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		4C6D7B4722853EA800B1F13C /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
-		4C6D7B942285B47E00B1F13C /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
-		4C6D7B982285B4F800B1F13C /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
-		4C6D7B9A2285B52F00B1F13C /* skull.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = skull.atlas; sourceTree = "<group>"; };
-		4C6D7B9C2285B6F700B1F13C /* attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = attack.atlas; path = ../../../../attack.atlas; sourceTree = "<group>"; };
-		4CEE8BC2227C76F400E47EBE /* die.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = die.atlas; sourceTree = "<group>"; };
+		4C6D7B982285B4F800B1F13C /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = run.atlas; path = "Fight Knight/run.atlas"; sourceTree = SOURCE_ROOT; };
+		4C6D7B9A2285B52F00B1F13C /* skull.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = skull.atlas; path = "Fight Knight/skull.atlas"; sourceTree = SOURCE_ROOT; };
+		4C6D7B9C2285B6F700B1F13C /* attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = attack.atlas; path = "Fight Knight/attack.atlas"; sourceTree = SOURCE_ROOT; };
+		4C6D7B9E2285B88000B1F13C /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = idle.atlas; path = "Fight Knight/idle.atlas"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,11 +70,10 @@
 		4C135E08226765C9001C63C7 /* Fight Knight */ = {
 			isa = PBXGroup;
 			children = (
+				4C6D7B9E2285B88000B1F13C /* idle.atlas */,
 				4C6D7B9C2285B6F700B1F13C /* attack.atlas */,
 				4C6D7B9A2285B52F00B1F13C /* skull.atlas */,
 				4C6D7B982285B4F800B1F13C /* run.atlas */,
-				4C6D7B942285B47E00B1F13C /* idle.atlas */,
-				4CEE8BC2227C76F400E47EBE /* die.atlas */,
 				4C68332122709B2B00D5BC6C /* Classes */,
 				4C135E16226765CA001C63C7 /* Assets.xcassets */,
 				4C135E18226765CA001C63C7 /* LaunchScreen.storyboard */,
@@ -168,12 +165,11 @@
 				4C135E15226765C9001C63C7 /* Main.storyboard in Resources */,
 				4C6D7B9D2285B6F700B1F13C /* attack.atlas in Resources */,
 				4C6D7B992285B4F800B1F13C /* run.atlas in Resources */,
+				4C6D7B9F2285B88000B1F13C /* idle.atlas in Resources */,
 				4C6D7B9B2285B52F00B1F13C /* skull.atlas in Resources */,
 				4C6D7B46228538C700B1F13C /* music.mp3 in Resources */,
-				4C6D7B952285B47E00B1F13C /* idle.atlas in Resources */,
 				4C135E17226765CA001C63C7 /* Assets.xcassets in Resources */,
 				4C135E1A226765CA001C63C7 /* LaunchScreen.storyboard in Resources */,
-				4CEE8BC6227C76F400E47EBE /* die.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

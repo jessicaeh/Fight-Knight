@@ -24,7 +24,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var knightIdleFrames: [SKTexture] = []
     private var knightAttackFrames: [SKTexture] = []
     private var knightRunFrames: [SKTexture] = []
-    private var knightDieFrames: [SKTexture] = []
     
     private var skull: SKSpriteNode!
     private var lastSkullSize: CGSize!
@@ -87,7 +86,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setUpKnight() {
         setIdle()
         setRun()
-        setDie()
         setAttack()
         runKnight("idle")
     }
@@ -206,18 +204,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knightRunFrames = runFrames
     }
     
-    func setDie() {
-        let knightAnimatedAtlas = SKTextureAtlas(named: "die")
-        var dieFrames: [SKTexture] = []
-        
-        let numImages = knightAnimatedAtlas.textureNames.count
-        for i in 1...numImages {
-            let knightTextureName = "knight\(i)"
-            dieFrames.append(knightAnimatedAtlas.textureNamed(knightTextureName))
-        }
-        knightDieFrames = dieFrames
-    }
-    
     func setAttack() {
         let knightAnimatedAtlas = SKTextureAtlas(named: "attack")
         var attackFrames: [SKTexture] = []
@@ -235,13 +221,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             knight.run(SKAction.repeatForever(
                 SKAction.animate(with: knightAttackFrames,
                                  timePerFrame: 0.06,
-                                 resize: false,
-                                 restore: true)),
-                       withKey:"animateKnight")
-        } else if status == "die" {
-            knight.run(SKAction.repeatForever(
-                SKAction.animate(with: knightDieFrames,
-                                 timePerFrame: 0.12,
                                  resize: false,
                                  restore: true)),
                        withKey:"animateKnight")
