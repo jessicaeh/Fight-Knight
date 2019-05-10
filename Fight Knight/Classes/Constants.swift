@@ -26,4 +26,5 @@ struct Layer {
     static let Knight: CGFloat = 2
     static let Ground: CGFloat = 1
     static let Buttons: CGFloat = 3
+    static let Skull: CGFloat = 2
 }

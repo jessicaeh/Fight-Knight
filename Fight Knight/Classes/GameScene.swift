@@ -18,6 +18,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var knightAttackFrames: [SKTexture] = []
     private var knightRunFrames: [SKTexture] = []
     private var knightDieFrames: [SKTexture] = []
+    
+    private var skull: SKSpriteNode!
+    private var lastSkullSize: CGSize!
+    private var skullFrames: [SKTexture] = []
+    
     private var leftButton: SKSpriteNode!
     private var rightButton: SKSpriteNode!
     private var attackButton: SKSpriteNode!
@@ -29,6 +34,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUpScenery()
         setUpKnight()
         setUpButtons()
+        setUpSkull()
+        
+        run(SKAction.repeatForever(
+            SKAction.sequence([
+                SKAction.run(runSkull),
+                SKAction.wait(forDuration: 7.0)
+                ])
+        ))
     }
     
     func setUpButtons() {
@@ -56,20 +69,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.zPosition = Layer.Background
         background.size = CGSize(width: size.width, height: size.height)
         addChild(background)
-        
-//        let ground = SKSpriteNode(imageNamed: ImageName.Ground)
-//        ground.position = CGPoint(x: 0, y: 0)
-//        ground.anchorPoint = CGPoint(x: 0, y: 0)
-//        ground.zPosition = Layer.Ground
-//        ground.size = CGSize(width: size.width, height: size.height * 0.13)
-//
-//        //let newBody = SKPhysicsBody(rectangleOf: ground.size)
-//        ground.physicsBody = SKPhysicsBody.init(rectangleOf: ground.size)
-//        //ground.physicsBody = newBody
-//        ground.physicsBody?.isDynamic = false
-//        ground.physicsBody?.allowsRotation = false
-//        ground.physicsBody?.affectedByGravity = false
-//        addChild(ground)
     }
     
     func setUpKnight() {
@@ -78,6 +77,59 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDie()
         setAttack()
         runKnight("idle")
+    }
+    
+    func setUpSkull() {
+        setSkull()
+        runSkull()
+    }
+    
+    func setSkull() {
+        let skullAnimatedAtlas = SKTextureAtlas(named: "skull")
+        var monsterFrames: [SKTexture] = []
+        
+        let numImages = skullAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let skullTextureName = "skull-\(i)"
+            monsterFrames.append(skullAnimatedAtlas.textureNamed(skullTextureName))
+        }
+        skullFrames = monsterFrames
+    }
+    
+    func runSkull() {
+        let firstFrameTexture = skullFrames[0]
+        skull = SKSpriteNode(texture: firstFrameTexture, size: CGSize(width: 2, height: 2))
+        skull.position = CGPoint(x: 700, y: frame.midY / 2.2)
+        skull.zPosition = Layer.Skull
+        lastSkullSize = skull.texture?.size()
+        setSkullPhysics()
+        
+        addChild(skull)
+        
+        skull.run(SKAction.repeatForever(
+            SKAction.animate(with: skullFrames,
+                             timePerFrame: 0.15,
+                             resize: false,
+                             restore: true)),
+                  withKey:"animateSkull")
+        
+        let actionMove = SKAction.move(to: CGPoint(x: -skull.size.width / 2, y: frame.midY / 2.2), duration: TimeInterval(6.0))
+        let actionMoveDone = SKAction.removeFromParent()
+        
+//                let loseAction = SKAction.run() { [weak self] in
+//                    guard let `self` = self else { return }
+//                    let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//                    let gameOverScene = GameOverScene(size: self.size, won: false)
+//                    self.view?.presentScene(gameOverScene, transition: reveal)
+//                }
+        skull.run(SKAction.sequence([actionMove, actionMoveDone]))
+//         monster.run(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
+    }
+    
+    func setSkullPhysics() {
+        skull.physicsBody = SKPhysicsBody.init(rectangleOf: skull.frame.size)
+        skull.physicsBody?.isDynamic = true
+        skull.physicsBody?.allowsRotation = false
     }
     
     func runKnight(_ status: String) {
@@ -96,6 +148,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastKnightSize = knight.texture?.size()
         knight.xScale = lastKnightSize.width
         knight.yScale = lastKnightSize.height
+        
+        lastSkullSize = skull.texture?.size()
+        skull.xScale = lastSkullSize.width
+        skull.yScale = lastSkullSize.height
     }
     
     func setPhysics() {
@@ -197,7 +253,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func knightAttack() {
         animateKnight("attack")
-        //usleep(1000000)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

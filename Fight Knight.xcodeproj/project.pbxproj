@@ -14,6 +14,7 @@
 		4C135E17226765CA001C63C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E16226765CA001C63C7 /* Assets.xcassets */; };
 		4C135E1A226765CA001C63C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C135E18226765CA001C63C7 /* LaunchScreen.storyboard */; };
 		4C68332422709B7400D5BC6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C68332322709B7400D5BC6C /* Constants.swift */; };
+		4C6D7B422285249700B1F13C /* skull.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B412285249600B1F13C /* skull.atlas */; };
 		4CEE8BC5227C76F400E47EBE /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC1227C76F400E47EBE /* idle.atlas */; };
 		4CEE8BC6227C76F400E47EBE /* die.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC2227C76F400E47EBE /* die.atlas */; };
 		4CEE8BC7227C76F400E47EBE /* attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC3227C76F400E47EBE /* attack.atlas */; };
@@ -30,6 +31,7 @@
 		4C135E19226765CA001C63C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C135E1B226765CA001C63C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C68332322709B7400D5BC6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4C6D7B412285249600B1F13C /* skull.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = skull.atlas; sourceTree = "<group>"; };
 		4CEE8BC1227C76F400E47EBE /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
 		4CEE8BC2227C76F400E47EBE /* die.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = die.atlas; sourceTree = "<group>"; };
 		4CEE8BC3227C76F400E47EBE /* attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = attack.atlas; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		4C135E08226765C9001C63C7 /* Fight Knight */ = {
 			isa = PBXGroup;
 			children = (
+				4C6D7B412285249600B1F13C /* skull.atlas */,
 				4CEE8BC3227C76F400E47EBE /* attack.atlas */,
 				4CEE8BC2227C76F400E47EBE /* die.atlas */,
 				4CEE8BC1227C76F400E47EBE /* idle.atlas */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C135E15226765C9001C63C7 /* Main.storyboard in Resources */,
+				4C6D7B422285249700B1F13C /* skull.atlas in Resources */,
 				4CEE8BC7227C76F400E47EBE /* attack.atlas in Resources */,
 				4C135E17226765CA001C63C7 /* Assets.xcassets in Resources */,
 				4C135E1A226765CA001C63C7 /* LaunchScreen.storyboard in Resources */,
