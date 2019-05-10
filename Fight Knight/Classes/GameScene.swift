@@ -10,6 +10,13 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+struct PhysicsCategory {
+    static let none: UInt32 = 0
+    static let all: UInt32 = UInt32.max
+    static let monster: UInt32 = 0b1
+    static let attack: UInt32 = 0b10
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var knight: SKSpriteNode!
@@ -132,8 +139,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setSkullPhysics() {
         skull.physicsBody = SKPhysicsBody.init(rectangleOf: skull.frame.size)
-        skull.physicsBody?.isDynamic = false
+        skull.physicsBody?.isDynamic = true
         skull.physicsBody?.allowsRotation = false
+        
+        skull.physicsBody?.categoryBitMask = PhysicsCategory.monster
+        skull.physicsBody?.contactTestBitMask = PhysicsCategory.attack
+        skull.physicsBody?.collisionBitMask = PhysicsCategory.none
     }
     
     func runKnight(_ status: String) {
@@ -162,6 +173,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knight.physicsBody = SKPhysicsBody.init(rectangleOf: knight.frame.size)
         knight.physicsBody?.isDynamic = false
         knight.physicsBody?.allowsRotation = false
+        
+        knight.physicsBody?.categoryBitMask = PhysicsCategory.attack
+        knight.physicsBody?.contactTestBitMask = PhysicsCategory.monster
+        knight.physicsBody?.collisionBitMask = PhysicsCategory.none
+        knight.physicsBody?.usesPreciseCollisionDetection = true
     }
     
     func setIdle() {
@@ -289,6 +305,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knight.removeAction(forKey: "left")
         knight.removeAction(forKey: "right")
         animateKnight("idle")
+    }
+    
+    func projectileDidCollideWithMonster(attack: SKSpriteNode, monster: SKSpriteNode) {
+        print("Hit")
+        monster.removeFromParent()
+        
+//        monstersDestroyed += 1
+//        if monstersDestroyed > 30 {
+//            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//            let gameOverScene = GameOverScene(size: self.size, won: true)
+//            view?.presentScene(gameOverScene, transition: reveal)
+//        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.monster != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.attack != 0)) {
+            if let monster = firstBody.node as? SKSpriteNode,
+                let attack = secondBody.node as? SKSpriteNode {
+                projectileDidCollideWithMonster(attack: attack, monster: monster)
+            }
+        }
     }
     
 
