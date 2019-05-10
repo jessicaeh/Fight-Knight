@@ -16,6 +16,7 @@
 		4C68332422709B7400D5BC6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C68332322709B7400D5BC6C /* Constants.swift */; };
 		4C6D7B422285249700B1F13C /* skull.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B412285249600B1F13C /* skull.atlas */; };
 		4C6D7B46228538C700B1F13C /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D7B45228538C700B1F13C /* music.mp3 */; };
+		4C6D7B4822853EA800B1F13C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D7B4722853EA800B1F13C /* GameOverScene.swift */; };
 		4CEE8BC5227C76F400E47EBE /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC1227C76F400E47EBE /* idle.atlas */; };
 		4CEE8BC6227C76F400E47EBE /* die.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC2227C76F400E47EBE /* die.atlas */; };
 		4CEE8BC7227C76F400E47EBE /* attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE8BC3227C76F400E47EBE /* attack.atlas */; };
@@ -34,6 +35,7 @@
 		4C68332322709B7400D5BC6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C6D7B412285249600B1F13C /* skull.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = skull.atlas; sourceTree = "<group>"; };
 		4C6D7B45228538C700B1F13C /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		4C6D7B4722853EA800B1F13C /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		4CEE8BC1227C76F400E47EBE /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
 		4CEE8BC2227C76F400E47EBE /* die.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = die.atlas; sourceTree = "<group>"; };
 		4CEE8BC3227C76F400E47EBE /* attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = attack.atlas; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				4C135E09226765C9001C63C7 /* AppDelegate.swift */,
 				4C135E0F226765C9001C63C7 /* GameScene.swift */,
 				4C135E11226765C9001C63C7 /* GameViewController.swift */,
+				4C6D7B4722853EA800B1F13C /* GameOverScene.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6D7B4822853EA800B1F13C /* GameOverScene.swift in Sources */,
 				4C135E10226765C9001C63C7 /* GameScene.swift in Sources */,
 				4C135E12226765C9001C63C7 /* GameViewController.swift in Sources */,
 				4C135E0A226765C9001C63C7 /* AppDelegate.swift in Sources */,

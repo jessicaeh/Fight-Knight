@@ -34,6 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var rightButton: SKSpriteNode!
     private var attackButton: SKSpriteNode!
     
+    private var attacking = false
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
@@ -50,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         run(SKAction.repeatForever(
             SKAction.sequence([
                 SKAction.run(runSkull),
-                SKAction.wait(forDuration: 7.0)
+                SKAction.wait(forDuration: 5.0)
                 ])
         ))
     }
@@ -124,17 +126,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                              restore: true)),
                   withKey:"animateSkull")
         
-        let actionMove = SKAction.move(to: CGPoint(x: -skull.size.width / 2, y: frame.midY / 2.2), duration: TimeInterval(6.0))
+        let actionMove = SKAction.move(to: CGPoint(x: -skull.size.width / 2, y: frame.midY / 2.2), duration: TimeInterval(4.0))
         let actionMoveDone = SKAction.removeFromParent()
         
-//                let loseAction = SKAction.run() { [weak self] in
-//                    guard let `self` = self else { return }
-//                    let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//                    let gameOverScene = GameOverScene(size: self.size, won: false)
-//                    self.view?.presentScene(gameOverScene, transition: reveal)
-//                }
-        skull.run(SKAction.sequence([actionMove, actionMoveDone]))
-//         monster.run(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
+        let loseAction = SKAction.run() { [weak self] in
+            guard let `self` = self else { return }
+            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+            let gameOverScene = GameOverScene(size: self.size, won: false)
+            self.view?.presentScene(gameOverScene, transition: reveal)
+        }
+        
+        skull.run(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
     }
     
     func setSkullPhysics() {
@@ -273,6 +275,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func knightAttack() {
         animateKnight("attack")
+        attacking = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -305,6 +308,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knight.removeAction(forKey: "left")
         knight.removeAction(forKey: "right")
         animateKnight("idle")
+        attacking = false
     }
     
     func projectileDidCollideWithMonster(attack: SKSpriteNode, monster: SKSpriteNode) {
@@ -334,11 +338,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         if ((firstBody.categoryBitMask & PhysicsCategory.monster != 0) &&
-            (secondBody.categoryBitMask & PhysicsCategory.attack != 0)) {
+            (secondBody.categoryBitMask & PhysicsCategory.attack != 0) && attacking == true) {
             if let monster = firstBody.node as? SKSpriteNode,
                 let attack = secondBody.node as? SKSpriteNode {
                 projectileDidCollideWithMonster(attack: attack, monster: monster)
             }
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.monster != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.attack != 0) && attacking == false) {
+            
+            let loseAction = SKAction.run() { [weak self] in
+                guard let `self` = self else { return }
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                let gameOverScene = GameOverScene(size: self.size, won: false)
+                self.view?.presentScene(gameOverScene, transition: reveal)
+            }
+            
+            skull.run(loseAction)
         }
     }
     
