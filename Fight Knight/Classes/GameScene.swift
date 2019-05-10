@@ -4,9 +4,7 @@
 //
 //  Created by Jessica Halbert on 4/17/19.
 //  Copyright © 2019 Jessica Halbert. All rights reserved.
-//  https://www.raywenderlich.com/144-spritekit-animations-and-texture-atlases-in-swift
-//  at a simple animation
-//  https://stackoverflow.com/questions/41292166/animation-atlas-and-dynamic-physicsbody-in-swift-3
+//
 
 import SpriteKit
 import GameplayKit
@@ -20,13 +18,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var knightAttackFrames: [SKTexture] = []
     private var knightRunFrames: [SKTexture] = []
     private var knightDieFrames: [SKTexture] = []
+    private var leftButton: SKSpriteNode!
+    private var rightButton: SKSpriteNode!
+    private var attackButton: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         physicsWorld.speed = 1.0
         setUpScenery()
         setUpKnight()
+        setUpButtons()
+    }
+    
+    func setUpButtons() {
+        leftButton = SKSpriteNode(imageNamed: ImageName.leftButton)
+        leftButton.position = CGPoint(x: frame.midX / 8, y: frame.midY)
+        leftButton.zPosition = Layer.Buttons
+        addChild(leftButton)
+        
+        rightButton = SKSpriteNode(imageNamed: ImageName.rightButton)
+        rightButton.position = CGPoint(x: 620, y: frame.midY)
+        rightButton.zPosition = Layer.Buttons
+        addChild(rightButton)
+        
+        attackButton = SKSpriteNode(imageNamed: ImageName.attackButton)
+        attackButton.position = CGPoint(x: 615, y: frame.midY / 2)
+        attackButton.zPosition = Layer.Buttons
+        attackButton.size = CGSize(width: size.width / 12, height: size.height / 7)
+        addChild(attackButton)
     }
     
     func setUpScenery() {
@@ -37,17 +57,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.size = CGSize(width: size.width, height: size.height)
         addChild(background)
         
-        let ground = SKSpriteNode(imageNamed: ImageName.Ground)
-        ground.anchorPoint = CGPoint(x: 0, y: 0)
-        ground.position = CGPoint(x: 0, y: 0)
-        ground.zPosition = Layer.Ground
-        ground.size = CGSize(width: size.width, height: size.height * 0.13)
-        
-        ground.physicsBody = SKPhysicsBody.init(rectangleOf: ground.size)
-        ground.physicsBody?.isDynamic = false
-        ground.physicsBody?.allowsRotation = false
-        ground.physicsBody?.affectedByGravity = false
-        addChild(ground)
+//        let ground = SKSpriteNode(imageNamed: ImageName.Ground)
+//        ground.position = CGPoint(x: 0, y: 0)
+//        ground.anchorPoint = CGPoint(x: 0, y: 0)
+//        ground.zPosition = Layer.Ground
+//        ground.size = CGSize(width: size.width, height: size.height * 0.13)
+//
+//        //let newBody = SKPhysicsBody(rectangleOf: ground.size)
+//        ground.physicsBody = SKPhysicsBody.init(rectangleOf: ground.size)
+//        //ground.physicsBody = newBody
+//        ground.physicsBody?.isDynamic = false
+//        ground.physicsBody?.allowsRotation = false
+//        ground.physicsBody?.affectedByGravity = false
+//        addChild(ground)
     }
     
     func setUpKnight() {
@@ -60,8 +82,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func runKnight(_ status: String) {
         let firstFrameTexture = knightIdleFrames[0]
-        knight = SKSpriteNode(texture: firstFrameTexture,size:CGSize(width:1,height:1))
-        knight.position = CGPoint(x: frame.midX / 2, y: frame.midY / 2.5)
+        knight = SKSpriteNode(texture: firstFrameTexture, size: CGSize(width: 1, height: 1))
+        knight.position = CGPoint(x: frame.midX / 2, y: frame.midY / 2.4)
         knight.zPosition = Layer.Knight
         lastKnightSize = knight.texture?.size()
         setPhysics()
@@ -80,7 +102,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         knight.physicsBody = SKPhysicsBody.init(rectangleOf: knight.frame.size)
         knight.physicsBody?.isDynamic = true
         knight.physicsBody?.allowsRotation = false
-        knight.physicsBody?.affectedByGravity = true
     }
     
     func setIdle() {
@@ -135,21 +156,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == "attack" {
             knight.run(SKAction.repeatForever(
                 SKAction.animate(with: knightAttackFrames,
-                                 timePerFrame: 0.1,
+                                 timePerFrame: 0.06,
                                  resize: false,
                                  restore: true)),
                        withKey:"animateKnight")
         } else if status == "die" {
             knight.run(SKAction.repeatForever(
                 SKAction.animate(with: knightDieFrames,
-                                 timePerFrame: 0.1,
+                                 timePerFrame: 0.12,
                                  resize: false,
                                  restore: true)),
                        withKey:"animateKnight")
         } else if status == "run" {
             knight.run(SKAction.repeatForever(
                 SKAction.animate(with: knightRunFrames,
-                                 timePerFrame: 0.1,
+                                 timePerFrame: 0.12,
                                  resize: false,
                                  restore: true)),
                        withKey:"animateKnight")
@@ -157,26 +178,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else {
             knight.run(SKAction.repeatForever(
                 SKAction.animate(with: knightIdleFrames,
-                                 timePerFrame: 0.1,
+                                 timePerFrame: 0.12,
                                  resize: false,
                                  restore: true)),
                        withKey:"animateKnight")
         }
         
     }
-//
-//    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) {
-//        knight.removeAllActions()
-//
-//        let closeMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthClosed))
-//        let wait = SKAction.wait(forDuration: delay)
-//        let openMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthOpen))
-//        let sequence = SKAction.sequence([closeMouth, wait, openMouth, wait, closeMouth])
-//
-//        knight.run(sequence)
-//    }
     
+    func moveKnight (moveBy: CGFloat, forTheKey: String) {
+        let moveAction = SKAction.moveBy(x: moveBy, y: 0, duration: 1)
+        let repeatForEver = SKAction.repeatForever(moveAction)
+        let seq = SKAction.sequence([moveAction, repeatForEver])
+        
+        //run the action on your ship
+        knight.run(seq, withKey: forTheKey)
+    }
     
+    func knightAttack() {
+        animateKnight("attack")
+        //usleep(1000000)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch: AnyObject in touches {
+            let pointTouched = touch.location(in: self)
+            
+            if leftButton.contains(pointTouched) {
+                moveKnight(moveBy: -100, forTheKey: "left")
+                animateKnight("run")
+            }
+            
+            if rightButton.contains(pointTouched) {
+                moveKnight(moveBy: 100, forTheKey: "right")
+                animateKnight("run")
+            }
+            
+            if attackButton.contains(pointTouched) {
+                knightAttack()
+            }
+        }
+    }
+    
+    func touchUp(atPoint pos : CGPoint) {
+        if attackButton.contains(pos) {
+            knightAttack()
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        knight.removeAction(forKey: "left")
+        knight.removeAction(forKey: "right")
+        animateKnight("idle")
+    }
+    
+
 //    func touchDown(atPoint pos : CGPoint) {
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos
@@ -193,28 +249,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        }
 //    }
 //
-//    func touchUp(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.red
-//            self.addChild(n)
-//        }
-//    }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let label = self.label {
-//            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-//        }
-//
-//        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-//    }
 //
 //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
 //    }
 //
 //    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

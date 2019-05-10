@@ -11,19 +11,19 @@ import UIKit
 struct ImageName {
     static let Background = "Background"
     static let Ground = "Ground"
+    static let leftButton = "ArrowLeft"
+    static let rightButton = "ArrowRight"
+    static let attackButton = "Sword"
 }
 
-//struct SoundFile {
-//    static let BackgroundMusic = "CheeZeeJungle.caf"
-//    static let Slice = "Slice.caf"
-//    static let Splash = "Splash.caf"
-//    static let NomNom = "NomNom.caf"
-//}
+struct SoundFile {
+    static let BackgroundMusic = "CheeZeeJungle.caf"
+    static let Attack = "Slice.caf"
+}
 
 struct Layer {
     static let Background: CGFloat = 0
-    static let Knight: CGFloat = 1
-//    static let Vine: CGFloat = 1
-//    static let Prize: CGFloat = 2
+    static let Knight: CGFloat = 2
     static let Ground: CGFloat = 1
+    static let Buttons: CGFloat = 3
 }
